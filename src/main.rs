@@ -13,9 +13,9 @@ const SLEEP_TIME: u16 = 100;
 const SLEEP_DURATION: Duration = Duration::from_millis(SLEEP_TIME as u64);
 const MINUTE: u16 = 60;
 const MAX_ITERATIONS: u8 = 4;
-const WORK_TIME: u16 = 25 * MINUTE;
-const SHORT_BREAK_TIME: u16 = 5 * MINUTE;
-const LONG_BREAK_TIME: u16 = 15 * MINUTE;
+const WORK_TIME: u16 = 45 * MINUTE;
+const SHORT_BREAK_TIME: u16 = 15 * MINUTE;
+const LONG_BREAK_TIME: u16 =  30 * MINUTE;
 
 enum CycleType {
     Work,
@@ -157,7 +157,7 @@ fn handle_client(rx: Receiver<String>) {
         }
 
         let value = format_time(state.elapsed_time, state.get_current_time());
-        let value_prefix = if state.running { "⏸ " } else { "▶ " };
+        //let value_prefix = if state.running { "⏸ " } else { "▶ " };
         let tooltip = format!(
             "{} pomodoro{} completed this session",
             state.session_completed,
@@ -174,7 +174,7 @@ fn handle_client(rx: Receiver<String>) {
         };
         state.update_state();
         print_message(
-            value_prefix.to_string() + value.clone().as_str(),
+            value.clone(), 
             tooltip.as_str(),
             class,
         );
